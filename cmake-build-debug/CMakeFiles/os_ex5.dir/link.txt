@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/os_ex5.dir/main.cpp.o CMakeFiles/os_ex5.dir/server.cpp.o CMakeFiles/os_ex5.dir/client.cpp.o -o os_ex5 

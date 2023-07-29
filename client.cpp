@@ -15,6 +15,7 @@
 #include <sys/select.h>
 #include <sys/time.h>
 #include <cstring>
+#include <dirent.h>
 
 int count_servers(const std::string& client_files_directory, std::vector<live_server_info>& servers) {
   servers.clear(); // Clear the servers vector before populating it with new data

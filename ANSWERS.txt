@@ -1,16 +1,26 @@
 Part 1: Theoretical Questions:
 
-1. The use case of Linux namespaces is providing every running process isolation in the way of allowing each process to have its own view of the system, as if they were the only process running. 
+1. The use case of Linux namespaces is providing every running process isolation in the way of allowing each process
+to have its own view of the system, as if they were the only process running.
 This allows multiple containers to run independently on a single host wihout conflicting process ID's.
 
 
 2.Two differences between containers and vm's are:
-	a. The Abstraction Level: VM's work at the hardware level and provide hardware virtualization (each VM runs its own operating system with its own kernel), whereas conatiners abstract the application and its dependencies whilst sharing the same os and kernel.
+	a. The Abstraction Level: VM's work at the hardware level and provide hardware virtualization (each VM runs its
+	own operating system with its own kernel), whereas conatiners abstract the application and its dependencies whilst
+	sharing the same os and kernel.
 
-	b.Isloation Method: VM's need hypervisors (1 or 2) in order to create isolation and manage the virtualiztion, in comparison to conatiners, where they use Linux namespaces and control groups in order to achieve this.
+	b.Isloation Method: VM's need hypervisors (1 or 2) in order to create isolation and manage the virtualiztion, in
+	comparison to conatiners, where they use Linux namespaces and control groups in order to achieve this.
 
 
-3. Yes, containers can connect via shared memory using IPC namespaces. When created, you can specify that conatiners will share an IPC namespace, which means that they can share memory segments and then they would be able to share memory (otherwise they won't). 
+3. Yes, containers can connect via shared memory using IPC namespaces. When created, you can specify that conatiners
+will share an IPC namespace, which means that they can share memory segments and then they would be able to share
+memory (otherwise they won't).
 
 
-4. Yes, containers can connect via sockets. They do this usually by one application running in one container will open a socket to a port in another conatainer. Because sockets are standard IPC's they can be used to connect between containers on the same host or even across different hosts over a network. Containers, being isolated environments with their own network stacks, can utilize sockets to communicate with each other or with other processes or services outside the container environment.
+4. Yes, containers can connect via sockets. They do this usually by one application running in one container will open
+ socket to a port in another conatainer. Because sockets are standard IPC's they can be used to connect between
+ containers on the same host or even across different hosts over a network. Containers, being isolated environments
+ with their own network stacks, can utilize sockets to communicate with each other or with other processes or
+ services outside the container environment.
