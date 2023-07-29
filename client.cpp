@@ -22,7 +22,7 @@ int count_servers(const std::string& client_files_directory, std::vector<live_se
   // Read the files in the specified directory
   DIR* dir = opendir(client_files_directory.c_str());
   if (dir == NULL) {
-      std::cerr << "Failed to open directory: " << client_files_directory << "\n";
+      std::cerr<<"system error: Failed to open directory: " << client_files_directory << "\n";
       return 0;
     }
 
@@ -49,7 +49,7 @@ int count_servers(const std::string& client_files_directory, std::vector<live_se
       std::ifstream info_file(info_file_path);
 
       if (!info_file.is_open()) {
-          std::cerr << "Failed to open file: " << info_file_path << "\n";
+          std::cerr<<"system error:Failed to open file: " << info_file_path << "\n";
           continue;
         }
 
@@ -184,7 +184,7 @@ void get_message_from_socket(live_server_info& server, std::string& msg) {
   int bytes_received = recv(server.client_fd, buffer, sizeof(buffer) - 1, 0);
 
   if (bytes_received == -1) {
-      std::cerr << "Error in receiving message from socket\n";
+      std::cerr<<"system error: Error in receiving message from socket\n";
       return;
     }
 
@@ -194,7 +194,7 @@ void get_message_from_socket(live_server_info& server, std::string& msg) {
 void get_message_from_shm(live_server_info& server, std::string& msg) {
   char* shared_memory = (char*)shmat(server.shmid, NULL, 0);
   if (shared_memory == (char*)-1) {
-      std::cerr << "Error in attaching to shared memory segment\n";
+      std::cerr<<"system error: Error in attaching to shared memory segment\n";
       return;
     }
 
