@@ -1,8 +1,15 @@
-#include <iostream>
-#include "server.h"
+//
+// Created by idanfin on 29/07/2023.
+//
 
-int main ()
-{
-  std::cout << "Hello, World!" << std::endl;
-  return 0;
+#include "main.h"
+#include <iostream>
+
+int main() {
+    return 0;
 }
+
+
+
+
+

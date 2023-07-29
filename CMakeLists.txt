@@ -6,5 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(os_ex5
         main.cpp
         server.h
+        server.cpp
         client.h
+        client.cpp
         globals.h)
