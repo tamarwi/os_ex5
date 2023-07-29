@@ -9,9 +9,6 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include "globals.h"
-#include "server.h"
-#include "globals.h"
-
 #include <arpa/inet.h>
 #include <fstream>
 #include <iostream>
@@ -92,7 +89,7 @@ void create_info_file(const server_setup_information& setup_info, live_server_in
   server.info_file_path = info_file_path;
 }
 
-void get_connection(const live_server_info& server) {
+void get_connection(live_server_info& server) {
   struct timeval timeout;
   timeout.tv_sec = 120;
   timeout.tv_usec = 0;
