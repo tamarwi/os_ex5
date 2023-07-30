@@ -1,16 +1,17 @@
-
-# Consider dependencies only in project.
-set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
-
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
   )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_CXX
+  "/mnt/c/Users/t9130543/CLionProjects/os_ex5/client.cpp" "/mnt/c/Users/t9130543/CLionProjects/os_ex5/cmake-build-debug/CMakeFiles/os_ex5.dir/client.cpp.o"
+  "/mnt/c/Users/t9130543/CLionProjects/os_ex5/main.cpp" "/mnt/c/Users/t9130543/CLionProjects/os_ex5/cmake-build-debug/CMakeFiles/os_ex5.dir/main.cpp.o"
+  "/mnt/c/Users/t9130543/CLionProjects/os_ex5/server.cpp" "/mnt/c/Users/t9130543/CLionProjects/os_ex5/cmake-build-debug/CMakeFiles/os_ex5.dir/server.cpp.o"
+  )
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# The set of dependency files which are needed:
-set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/c/Users/idanfin/Documents/Year 3/Second semester/OS/OS_ex5/os_ex5/client.cpp" "CMakeFiles/os_ex5.dir/client.cpp.o" "gcc" "CMakeFiles/os_ex5.dir/client.cpp.o.d"
-  "/mnt/c/Users/idanfin/Documents/Year 3/Second semester/OS/OS_ex5/os_ex5/main.cpp" "CMakeFiles/os_ex5.dir/main.cpp.o" "gcc" "CMakeFiles/os_ex5.dir/main.cpp.o.d"
-  "/mnt/c/Users/idanfin/Documents/Year 3/Second semester/OS/OS_ex5/os_ex5/server.cpp" "CMakeFiles/os_ex5.dir/server.cpp.o" "gcc" "CMakeFiles/os_ex5.dir/server.cpp.o.d"
+# The include file search paths:
+set(CMAKE_CXX_TARGET_INCLUDE_PATH
   )
 
 # Targets to which this target links.

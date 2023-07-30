@@ -51,7 +51,7 @@ void start_communication(const server_setup_information& setup_info, live_server
     }
 
   // Allocate shared memory
-  key_t key = ftok(setup_info.shm_pathname, setup_info.shm_proj_id);
+  key_t key = ftok(setup_info.shm_pathname.c_str(), setup_info.shm_proj_id);
   if (key == -1) {
       std::cerr<<"system error: ftok failed"<<std::endl;
       close(server_fd);
@@ -79,11 +79,10 @@ void create_info_file(const server_setup_information& setup_info, live_server_in
       exit(EXIT_FAILURE);
     }
 
-  info_file << "2\n";
   info_file << "IP: " << "127.0.0.1" << "\n"; //TODO is ip always local host?
-  info_file << "Port: " << setup_info.port << "\n";
-  info_file << "Shared Memory Pathname: " << setup_info.shm_pathname << "\n";
-  info_file << "Shared Memory Proj ID: " << setup_info.shm_proj_id << "\n";
+  info_file << setup_info.port << "\n";
+  info_file << setup_info.shm_pathname << "\n";
+  info_file << setup_info.shm_proj_id << "\n";
   info_file.close();
 
   server.info_file_path = info_file_path;

@@ -66,6 +66,18 @@ build CMakeFiles/os_ex5.dir/main.cpp.obj: CXX_COMPILER__os_ex5_Debug C$:/Users/t
   OBJECT_DIR = CMakeFiles\os_ex5.dir
   OBJECT_FILE_DIR = CMakeFiles\os_ex5.dir
 
+build CMakeFiles/os_ex5.dir/server.cpp.obj: CXX_COMPILER__os_ex5_Debug C$:/Users/t9130543/CLionProjects/os_ex5/server.cpp || cmake_object_order_depends_target_os_ex5
+  DEP_FILE = CMakeFiles\os_ex5.dir\server.cpp.obj.d
+  FLAGS = -g -std=gnu++11
+  OBJECT_DIR = CMakeFiles\os_ex5.dir
+  OBJECT_FILE_DIR = CMakeFiles\os_ex5.dir
+
+build CMakeFiles/os_ex5.dir/client.cpp.obj: CXX_COMPILER__os_ex5_Debug C$:/Users/t9130543/CLionProjects/os_ex5/client.cpp || cmake_object_order_depends_target_os_ex5
+  DEP_FILE = CMakeFiles\os_ex5.dir\client.cpp.obj.d
+  FLAGS = -g -std=gnu++11
+  OBJECT_DIR = CMakeFiles\os_ex5.dir
+  OBJECT_FILE_DIR = CMakeFiles\os_ex5.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target os_ex5
@@ -74,7 +86,7 @@ build CMakeFiles/os_ex5.dir/main.cpp.obj: CXX_COMPILER__os_ex5_Debug C$:/Users/t
 #############################################
 # Link the executable os_ex5.exe
 
-build os_ex5.exe: CXX_EXECUTABLE_LINKER__os_ex5_Debug CMakeFiles/os_ex5.dir/main.cpp.obj
+build os_ex5.exe: CXX_EXECUTABLE_LINKER__os_ex5_Debug CMakeFiles/os_ex5.dir/main.cpp.obj CMakeFiles/os_ex5.dir/server.cpp.obj CMakeFiles/os_ex5.dir/client.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\os_ex5.dir
