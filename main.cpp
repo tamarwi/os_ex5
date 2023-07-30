@@ -1,12 +1,20 @@
-//
-// Created by idanfin on 29/07/2023.
-//
-
 #include "main.h"
-#include <iostream>
+//#include "server.h"
+#include "client.h"
 
-int main() {
-    return 0;
+
+int main ()
+{
+//  struct server_setup_information s = {8080,
+//                                       ".",
+//                                       80,
+//                                       "test.txt",
+//                                       "."};
+//  run(s, "hello shared", "hello socket");
+  run("../servers");
+
+
+  return 0;
 }
 
 
