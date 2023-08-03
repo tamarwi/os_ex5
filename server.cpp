@@ -50,15 +50,15 @@ start_communication (const server_setup_information &setup_info, live_server_inf
   if (bind (server_fd, (struct sockaddr *) &server_addr, sizeof (server_addr))
       == -1)
     {
-      std::cerr << "system error: Socket bind failed" << std::endl;
+      std::cerr << "system error: Socket bind failed in server" << std::endl;
       close (server_fd);
       exit (EXIT_FAILURE);
     }
 
   // Listen for incoming connections
   if (listen (server_fd, 5) == -1)
-    { //TODO change 5 to number of connections that can be in backlog
-      std::cerr << "system error: Socket listen failed" << std::endl;
+    {
+      std::cerr << "system error: Socket listen failed in server" << std::endl;
       close (server_fd);
       exit (EXIT_FAILURE);
     }
@@ -67,8 +67,7 @@ start_communication (const server_setup_information &setup_info, live_server_inf
   key_t key = ftok (setup_info.shm_pathname.c_str (), setup_info.shm_proj_id);
   if (key == -1)
     {
-      std::cout<<std::strerror(errno)<<std::endl;
-      std::cerr << "system error: ftok failed" << std::endl;
+      std::cerr << "system error: ftok failed in server" << std::endl;
       close (server_fd);
       exit (EXIT_FAILURE);
     }
@@ -76,7 +75,7 @@ start_communication (const server_setup_information &setup_info, live_server_inf
   shmid = shmget (key, SHARED_MEMORY_SIZE, IPC_CREAT | 0666);
   if (shmid == -1)
     {
-      std::cerr << "system error: shmget failed" << std::endl;
+      std::cerr << "system error: shmget failed in server" << std::endl;
       close (server_fd);
       exit (EXIT_FAILURE);
     }
@@ -94,7 +93,7 @@ create_info_file (const server_setup_information &setup_info, live_server_info &
   std::ofstream info_file (info_file_path);
   if (!info_file.is_open ())
     {
-      std::cerr << "system error: Failed to create info file" << std::endl;
+      std::cerr << "system error: Failed to create info file in server" << std::endl;
       exit (EXIT_FAILURE);
     }
 
@@ -136,7 +135,7 @@ void get_connection (live_server_info &server)
   int activity = select (server.server_fd + 1, &readfds, NULL, NULL, &timeout);
   if (activity == -1)
     {
-      std::cerr << "system error: Select failed" << std::endl;
+      std::cerr << "system error: Select failed in server" << std::endl;
       server.client_fd = -1;
     }
   else if (activity == 0)
@@ -150,7 +149,7 @@ void get_connection (live_server_info &server)
       server.client_fd = accept (server.server_fd, (struct sockaddr *) &client_addr, &addr_len);
       if (server.client_fd == -1)
         {
-          std::cerr << "system error: Accept failed" << std::endl;
+          std::cerr << "system error: Accept failed in server" << std::endl;
         }
     }
 }
@@ -168,7 +167,7 @@ void write_to_shm (const live_server_info &server, const std::string &msg)
   char *shared_memory = (char *) shmat (server.shmid, NULL, 0);
   if (shared_memory == (char *) -1)
     {
-      std::cerr << "system error: shmat failed" << std::endl;
+      std::cerr << "system error: shmat failed in server" << std::endl;
       return;
     }
 

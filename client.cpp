@@ -22,7 +22,7 @@
 int
 count_servers (const std::string &client_files_directory, std::vector<live_server_info> &servers)
 {
-  servers.clear (); // Clear the servers vector before populating it with new data
+  servers.clear ();
 
   // Read the files in the specified directory
   DIR *dir = opendir (client_files_directory.c_str ());
@@ -61,7 +61,7 @@ count_servers (const std::string &client_files_directory, std::vector<live_serve
       if (!info_file.is_open ())
         {
           std::cerr << "system error:Failed to open file: " << info_file_path
-                    << "\n";
+                    << std::endl;
           continue;
         }
 
@@ -104,14 +104,8 @@ count_servers (const std::string &client_files_directory, std::vector<live_serve
               if (connect (server.client_fd, (struct sockaddr *) &server_addr, sizeof (server_addr))
                   == -1)
                 {
-                  close (server.client_fd);
                   server.client_fd = -1;
                 }
-            }
-          else
-            {
-              close (server.client_fd);
-              server.client_fd = -1;
             }
         }
 
@@ -146,48 +140,33 @@ void print_server_infos (const std::vector<live_server_info> &servers)
   int total_running_on_host = 0;
   int total_running_on_container = 0;
   int total_running_on_vm = 0;
+  bool is_socket = false, is_shared = false;
 
   for (const auto &server: servers)
     {
       if (server.shmid != -1)
         {
-          std::string msg;
-          get_message_from_shm (server, msg);
-          std::cout << "Shared Memory: " << msg << "\n";
-
-          if (msg == "Host")
-            {
-              total_running_on_host++;
-            }
-          else if (msg == "Container")
-            {
-              total_running_on_container++;
-            }
-          else if (msg == "VM")
-            {
-              total_running_on_vm++;
-            }
+          is_shared = true;
         }
-
       if (server.client_fd != -1)
         {
-          std::string msg;
-          get_message_from_socket (server, msg);
-          std::cout << "Socket: " << msg << "\n";
-
-          if (msg == "Host")
-            {
-              total_running_on_host++;
-            }
-          else if (msg == "Container")
-            {
-              total_running_on_container++;
-            }
-          else if (msg == "VM")
-            {
-              total_running_on_vm++;
-            }
+          is_socket = true;
         }
+
+      if (is_socket && is_shared)
+        {
+          total_running_on_host++;
+        }
+      else if (!is_socket && is_shared)
+        {
+          total_running_on_container++;
+        }
+      else
+        {
+          total_running_on_vm++;
+        }
+      is_shared = false;
+      is_socket = false;
     }
 
   std::cout << "Total Servers: " << total_servers << "\n";
@@ -224,7 +203,6 @@ void get_message_from_shm (const live_server_info &server, std::string &msg)
     }
 
   msg = std::string (shared_memory);
-  shmdt (shared_memory);
 }
 
 void disconnect (const std::vector<live_server_info> &servers)
